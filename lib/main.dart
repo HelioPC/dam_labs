@@ -51,21 +51,21 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Column(
         children: <Widget>[
-          Visibility(
-            visible: _taskList.isNotEmpty,
-            replacement: const Center(
-              child: Text('Lista de tarefas vazia'),
-            ),
+          Expanded(
             child: SizedBox(
               width: double.infinity,
-              height: 250,
-              child: Expanded(
+              child: Visibility(
+                visible: _taskList.isNotEmpty,
+                replacement: const Center(
+                  child: Text('Lista de tarefas vazia'),
+                ),
                 child: ListView.builder(
                   itemCount: _taskList.length,
                   itemBuilder: (context, index) {
@@ -99,12 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
+          const SizedBox(height: 50),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _addTask,
-        tooltip: 'Adicionar',
-        child: const Icon(Icons.add),
       ),
     );
   }
