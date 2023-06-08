@@ -36,6 +36,12 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController controller = TextEditingController();
 
   void _addTask() {
+    if (controller.text.isEmpty) {
+      return;
+    }
+
+    FocusManager.instance.primaryFocus?.unfocus();
+
     setState(() {
       _taskList.add(controller.text);
       controller.clear();
@@ -90,11 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     controller: controller,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(labelText: 'Description'),
+                    textInputAction: TextInputAction.done,
+                    onEditingComplete: _addTask,
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: _addTask,
-                  child: const Text('Adicionar tarefa'),
                 ),
               ],
             ),
