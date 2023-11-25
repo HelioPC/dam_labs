@@ -16,7 +16,7 @@ class DetailPage extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 300,
+              height: 100,
               width: double.infinity,
               child: CircleAvatar(
                 backgroundColor: note.noteColor,
@@ -30,6 +30,10 @@ class DetailPage extends StatelessWidget {
               child: Text(
                 note.description,
                 textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           ],

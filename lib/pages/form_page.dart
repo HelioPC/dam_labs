@@ -42,7 +42,7 @@ class _FormPageState extends State<FormPage> {
       await showDialog<bool>(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return AlertDialog.adaptive(
             title: const Text('Adicionar nota'),
             content: const Text('Criar uma nova nota'),
             actions: [
@@ -73,23 +73,25 @@ class _FormPageState extends State<FormPage> {
         }
       });
     } catch (e) {
-      await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Erro'),
-            content: const Text('Ocorreu um erro inesperado'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Ok'),
-              ),
-            ],
-          );
-        },
-      );
+      if (context.mounted) {
+        await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog.adaptive(
+              title: const Text('Erro'),
+              content: const Text('Ocorreu um erro inesperado'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
 
